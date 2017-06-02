@@ -1,0 +1,60 @@
+{% extends 'pages/base.html' %}
+{% load staticfiles %}
+
+
+{% block body %}
+<div class="row main-section">
+  <div class="col s3 left-col">
+    <div class="left_section">
+        <div class="left_links w3-bar-block w3-black">
+        <ul>
+          <li>
+            <a href="{% url 'create_check' %}" class="nav_links w3-bar-item w3-button">Create Page</a>
+          </li>
+          <li><a href="" class="nav_links w3-bar-item w3-button">Followed Pages</a></li>
+          <li><a href="{% url 'browse' %}" class="nav_links w3-bar-item w3-button">Browse Pages</a></li>
+        </ul>
+
+        <div class="category-links" style="margin-left: 14px; margin-top:10px;">
+              <p class="category_heading" style="margin: 0px;">Categories</p>
+          <ul>
+            {% for cate in category %}
+            <li style="margin-bottom: 5px;"><a href="" class="nav_links">{{ cate.category }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col s6 middle-col">
+    <div class="middle-section">
+      {% include page_template %}
+    </div>
+    {% block js %}
+    {{ block.super }}
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="{% static 'pages/js/el-pagination.js' %}"></script>
+        <script>
+            $.endlessPaginate({
+              paginateOnScroll: true,
+              paginateOnScrollMargin: 20
+            });
+        </script>
+    {% endblock %}
+  </div>
+  <div class="col s3">
+  <p>Your Pages:</p>
+    <ul>
+          {% for page in user_pages_list %}
+
+            <li>
+              <a href="{% url 'pagedetail' page.id %}">{{page}}</a><br>
+              <img src="{{ page.cover_page.url }}" style="width: 100px; height: 100px;">
+            </li>
+          {% endfor %}
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

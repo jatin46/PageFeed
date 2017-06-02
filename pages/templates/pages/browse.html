@@ -1,0 +1,14 @@
+{% extends 'pages/base.html' %}
+
+{% block body %}
+<div class="container">
+	<div class="row">
+		{% for page_data in page_list %}
+		<div class="col s4" style="height: 35%;">
+			<a href="">{{ page_data.page_name }}</a>
+			<img src="{{ page_data.cover_page.url }}" style="width: 100%;">
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endblock %}

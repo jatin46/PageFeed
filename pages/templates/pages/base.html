@@ -1,0 +1,63 @@
+
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+       <!-- Compiled and minified CSS -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+
+      <!--Import jQuery before materialize.js-->
+      <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+        <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+                
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+      <!--Let browser know website is optimized for mobile-->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      {% load staticfiles %}
+      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" type="text/css" href="{% static 'pages/index.css' %}">
+           <link rel="stylesheet" type="text/css" href="{% static 'pages/main.css' %}">
+      <script>
+    $(document).ready(function() {
+        // messages timeout for 10 sec 
+        setTimeout(function() {
+            $('.messages').fadeOut('slow');
+        }, 1000); // <-- time in milliseconds, 1000 =  1 sec
+    });
+      </script>
+
+          </head>
+
+    <body>
+    <nav>
+    <div class="nav-wrapper">
+      <a href="{% url 'index' %}" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="badges.html">Components</a></li>
+        <li>
+        {% if request.user.is_authenticated %}
+          <a href="/accounts/logout/">Log Out</a>
+        {% else %}
+            <a href="/accounts/login/" class="pull-right">Login</a>
+        {% endif %}
+        </li>
+      </ul>
+      </div>
+  </nav>
+    {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+          <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+    {% endif %}
+      {% block body %}
+      {% endblock %}
+      </li>
+
+    </body>
+  </html>
+        

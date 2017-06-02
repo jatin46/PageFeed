@@ -1,0 +1,15 @@
+<p id="comment_data">
+	<form method="POST" action=".">{% csrf_token %}
+		{{ comment_form }}
+		<input type="submit" name="" class="cbtn{{ post_id }}">
+	</form>
+	<script type="text/javascript">
+            
+    </script>
+    {% for comment in comments %}
+        <blockquote>
+            {{ comment.content }}<br>
+            <small>via {{ comment.user }} | {{ comment.timestamp|timesince }} ago</small>
+        </blockquote>
+    {% endfor %}
+</p>
